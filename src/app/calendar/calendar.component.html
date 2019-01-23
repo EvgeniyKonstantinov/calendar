@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr class="days">
+      <td class="days_el" *ngFor="let day of days; let i = index" [class.active]="i === 3">
+        {{day}}
+      </td>
+    </tr>
+    <tr class="dates">
+      <td class="dates_el" *ngFor="let date of dates; let i = index"
+          [class.active]="i === 3" [class.disable]="i === 5 || i === 6">
+        {{date}}
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="data_cell" *ngFor="let date of dates; let i = index"
+          [class.active]="i === 3" [class.disable]="i === 5 || i === 6">
+        <ng-container *ngFor="let meet of meeting">
+          <div class="meet" *ngIf="date === meet.day">
+            {{meet.timeStart}} >> Встреча
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,59 @@
+@import "variables";
+
+:host {
+  display: block;
+
+  table {
+    width: calc(100% - 1px);
+    min-width: 111.3rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-height: 100vh;
+  }
+
+  tr {
+    width: 100%;
+  }
+
+  td {
+    width: calc(100% / 7);
+  }
+
+  .days {
+    height: 8.1rem;
+    text-align: center;
+  }
+
+  .dates {
+    height: 4rem;
+    padding: 1rem;
+  }
+
+  .dates_el {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+
+  .data_cell {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 1.4rem;
+    vertical-align: top;
+    padding: 0;
+  }
+
+  .active {
+    border: 1px solid #DEDEDE;
+    background-color: rgba($primary, 0.1);
+  }
+
+  .disable {
+    background-color: rgba(196, 196, 196, 0.3);
+  }
+
+  .meet {
+    background-color: $primary;
+    color: $primary-contrast;
+    padding: 1.6rem 1rem;
+    margin-bottom: 0.2rem;
+  }
+}

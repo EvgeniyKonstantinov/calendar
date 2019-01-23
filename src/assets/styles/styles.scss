@@ -1,0 +1,16 @@
+@import "fonts.scss";
+@import "variables.scss";
+
+html {
+  font-size: 10px;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  margin: 0;
+  font-size: 1.8rem;
+  font-family: Roboto;
+}
