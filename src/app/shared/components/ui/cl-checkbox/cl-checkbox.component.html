@@ -1,0 +1,11 @@
+<label>
+  <input [title]="title"
+         [disabled]="!!readonly"
+         [(ngModel)]="value"
+         [required]="!!required"
+         type="checkbox"
+         (blur)="onBlur()"
+         (ngModelChange)="onValueChange($event)">
+  <span class="checkbox" [class.checked]="value"><cl-icon class="icon" iconName="check"></cl-icon></span>
+  {{label}}
+</label>

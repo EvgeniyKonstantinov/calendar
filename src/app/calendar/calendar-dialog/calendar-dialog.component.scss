@@ -1,0 +1,36 @@
+@import "variables";
+
+:host {
+  .meet_textbox {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0.9rem;
+    }
+  }
+
+  .meet_dialog {
+    padding: 1rem 1.5rem;
+  }
+
+  .add_user {
+    font-size: 1.3rem;
+    color: $primary;
+    border-bottom: 1px dashed;
+    margin-right: auto;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+
+    &:hover {
+      color: $primary-dark;
+    }
+  }
+
+  .users_area {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}

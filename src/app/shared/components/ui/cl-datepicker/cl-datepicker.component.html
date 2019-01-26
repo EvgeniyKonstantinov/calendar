@@ -1,0 +1,14 @@
+<label *ngIf="label" [for]="formControlName">{{label}}</label>
+<div class="wrapper" [attr.data-dayWeek]="dayWeek" [style.width]="inputWidth">
+  <input [placeholder]="placeholder"
+         [attr.title]="title"
+         [disabled]="!!readonly"
+         [value]="dateValue"
+         [required]="!!required"
+         type="date"
+         [min]="minDate"
+         [max]="maxDate"
+         (blur)="onBlur()"
+         (change)="onDateChange($event)"
+         (ngModelChange)="onValueChange($event)">
+</div>

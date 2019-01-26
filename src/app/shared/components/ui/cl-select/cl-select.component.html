@@ -1,0 +1,10 @@
+<label *ngIf="label" [for]="formControlName">{{label}}</label>
+<select [attr.title]="title"
+        [disabled]="!!readonly"
+        [(ngModel)]="value"
+        [required]="!!required"
+        (blur)="onBlur()"
+        [style.width]="inputWidth"
+        (ngModelChange)="onValueChange($event)">
+  <option *ngFor="let el of data" [value]="el.value">{{el.title}}</option>
+</select>

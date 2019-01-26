@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+
+  label {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox {
+    display: inline-flex;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    margin-right: 0.8rem;
+    border-radius: 2px;
+    padding: 0.15rem;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      transform: scale(0);
+      transition: all ease-in-out 0.2s;
+    }
+
+    &.checked {
+      .icon {
+        transform: scale(1);
+      }
+    }
+  }
+
+  input {
+    display: none;
+  }
+}

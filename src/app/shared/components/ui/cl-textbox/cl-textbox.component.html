@@ -1,0 +1,11 @@
+<label *ngIf="label" [for]="formControlName">{{label}}</label>
+<input [attr.placeholder]="placeholder"
+       [attr.title]="title"
+       [attr.id]="formControlName"
+       [disabled]="!!readonly"
+       [(ngModel)]="value"
+       [required]="!!required"
+       [type]="inputType"
+       (blur)="onBlur()"
+       [style.width]="inputWidth"
+       (ngModelChange)="onValueChange($event)">

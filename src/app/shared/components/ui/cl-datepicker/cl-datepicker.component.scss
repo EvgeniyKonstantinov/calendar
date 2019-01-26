@@ -1,0 +1,60 @@
+@import "variables";
+
+:host {
+  height: 2.6rem;
+  font-size: 1.3rem;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+
+  label {
+    padding-right: 1rem;
+  }
+
+  .wrapper {
+    width: auto;
+    position: relative;
+    height: 100%;
+
+    &::before {
+      content: attr(data-dayweek);
+      position: absolute;
+      left: 5px;
+      bottom: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+    }
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    height: 100%;
+    outline: none;
+    font-size: inherit;
+    padding-left: 2.3rem;
+
+    &:active, &:focus {
+      border-color: rgba($primary, 0.8);
+    }
+  }
+
+  input::-webkit-inner-spin-button,
+  input::-webkit-clear-button{
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  input::-ms-clear {
+    display: none;
+  }
+
+  input::-webkit-datetime-edit-month-field { color: black; }
+  input::-webkit-datetime-edit-day-field { color: black; }
+  input::-webkit-datetime-edit-year-field { color: black; }
+
+}

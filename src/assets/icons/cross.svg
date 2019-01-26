@@ -1,0 +1,10 @@
+<svg aria-hidden="true"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="close" viewBox="0 0 11 11">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M5.964 5.257l4.55-4.55L9.805 0l-4.55 4.55L.708 0 0 .707l4.55 4.55L.292 9.513 1 10.22l4.257-4.256 4.256 4.256.707-.707-4.256-4.256z" fill="#000" fill-opacity=".7"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 497.5 497.5">
+      <path d="M487.75 78.125c-13-13-33-13-46 0l-272 272-114-113c-13-13-33-13-46 0s-13 33 0 46l137 136c6 6 15 10 23 10s17-4 23-10l295-294c13-13 13-34 0-47z"/>
+    </symbol>
+  </defs>
+</svg>

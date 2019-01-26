@@ -7,9 +7,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
-
+  public showedDialog = false;
   public days: string[] = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
   public dates: string[] = ['29 окт', '30 окт', '31 окт', '1 ноя', '2 ноя', '3 ноя', '4 ноя'];
+
 
   public meeting = [
     {
@@ -46,4 +47,11 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
   }
 
+  public onShowDialog() {
+    this.showedDialog = true;
+  }
+
+  public onCloseDialog() {
+    this.showedDialog = false;
+  }
 }
