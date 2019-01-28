@@ -1,9 +1,9 @@
 <label *ngIf="label" [for]="formControlName">{{label}}</label>
 <div class="wrapper" [attr.data-dayWeek]="dayWeek" [style.width]="inputWidth">
-  <input [placeholder]="placeholder"
+  <input [attr.placeholder]="placeholder"
          [attr.title]="title"
          [disabled]="!!readonly"
-         [value]="dateValue"
+         [(ngModel)]="dateValue"
          [required]="!!required"
          type="date"
          [min]="minDate"

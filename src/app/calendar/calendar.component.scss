@@ -43,13 +43,17 @@
     padding: 0;
   }
 
+  .disable {
+    background-color: rgba(196, 196, 196, 0.3);
+  }
+
   .active {
     border: 1px solid #dedede;
     background-color: rgba($primary, 0.1);
   }
 
-  .disable {
-    background-color: rgba(196, 196, 196, 0.3);
+  .disable.active {
+    background: linear-gradient(rgba($primary, 0.1), rgba($primary, 0.1)), rgba(196, 196, 196, 0.3);
   }
 
   .meet {

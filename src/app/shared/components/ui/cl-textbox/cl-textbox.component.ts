@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -17,7 +27,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 export class ClTextboxComponent implements OnInit, ControlValueAccessor {
 
   @Input() value: string;
-  @Input() readonly: boolean;
   @Input() placeholder: string;
   @Input() title: string;
   @Input() required: boolean;
@@ -25,6 +34,8 @@ export class ClTextboxComponent implements OnInit, ControlValueAccessor {
   @Input() label: string;
   @Input() formControlName: string;
   @Input() inputWidth: string;
+  @HostBinding('class.validate') @Input() validate: boolean;
+  @HostBinding('class.disabled') @Input() readonly: boolean;
 
   @Output() readonly valueChange = new EventEmitter<string>();
 

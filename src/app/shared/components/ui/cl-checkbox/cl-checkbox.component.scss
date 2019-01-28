@@ -22,15 +22,23 @@
       transform: scale(0);
       transition: all ease-in-out 0.2s;
     }
+  }
 
-    &.checked {
+  input {
+    display: none;
+
+    &:checked + .checkbox {
       .icon {
         transform: scale(1);
       }
     }
   }
 
-  input {
-    display: none;
+  .disabled {
+    .checkbox {
+      background: rgba(196, 196, 196, 1);
+      border: none;
+      opacity: 0.3;
+    }
   }
 }

@@ -1,4 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {MeetingModel} from '../shared/models/meeting.model';
+import {StoreService} from '../core/store.service';
+import {Observable} from 'rxjs';
+import {TimeUtils} from '../shared/utils/time';
 
 @Component({
   selector: 'cl-calendar',
@@ -8,50 +12,46 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
   public showedDialog = false;
-  public days: string[] = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-  public dates: string[] = ['29 окт', '30 окт', '31 окт', '1 ноя', '2 ноя', '3 ноя', '4 ноя'];
+  public pickDate: string;
+  public pickMeeting: MeetingModel;
+  public dates: { title: string; value: string; dayName: string }[] = TimeUtils.weekDayDates;
+  public nowDate: string = TimeUtils.manipulationFormat(new Date());
+  public nowTime: string = TimeUtils.manipulationFormatTime(new Date());
 
+  public meetings$: Observable<MeetingModel[]>;
 
-  public meeting = [
-    {
-      id: 0,
-      theme: 'Ретроспектива',
-      day: '30 окт',
-      timeStart: '10:00',
-      timeEnd: '11:00',
-      peoples: ['Иван Абрамов']
-    },
-
-    {
-      id: 1,
-      theme: 'Ретроспектива',
-      day: '30 окт',
-      timeStart: '12:00',
-      timeEnd: '13:00',
-      peoples: ['Иван Абрамов']
-    },
-
-    {
-      id: 3,
-      theme: 'Ретроспектива',
-      day: '31 окт',
-      timeStart: '10:00',
-      timeEnd: '11:00',
-      peoples: ['Иван Абрамов']
-    },
-  ];
-
-  constructor() {
+  constructor(private storeService: StoreService) {
   }
 
   ngOnInit() {
+    this.meetings$ = this.storeService.storeData;
   }
 
-  public onShowDialog() {
+  public onShowDialog(date: string, i: number, event: Event, meeting: MeetingModel | null = null): void {
+    event.stopPropagation();
+    if (date < this.nowDate) {
+      alert('Вы не можете назначать встречи на прошедшие дни');
+      return;
+    }
+
+    if (i === 5 || i === 6) {
+      alert('Вы не можете назначать встречи на выходные дни');
+      return;
+    }
+
+    this.pickMeeting = meeting;
+    this.pickDate = date;
     this.showedDialog = true;
   }
 
-  public onCloseDialog() {
+  public onCloseDialog(event: MeetingModel | null): void {
+    if (event) {
+      this.storeService.updateData(event);
+    }
     this.showedDialog = false;
+  }
+
+  public trackByMeeting(_, meeting: MeetingModel) {
+    return meeting.id;
   }
 }

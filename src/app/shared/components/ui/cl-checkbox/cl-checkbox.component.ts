@@ -16,7 +16,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class ClCheckboxComponent implements OnInit, ControlValueAccessor {
 
-  @Input() value: string;
+  @Input() value: boolean;
   @Input() readonly: boolean;
   @Input() label;
   @Input() title = '';
@@ -33,8 +33,8 @@ export class ClCheckboxComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  public writeValue(value: string): void {
-    this.value = value === null || value === undefined ? '' : `${value}`;
+  public writeValue(value: boolean): void {
+    this.value = value;
     this.changeDetectorRef.detectChanges();
   }
 
@@ -58,6 +58,4 @@ export class ClCheckboxComponent implements OnInit, ControlValueAccessor {
       this.onTouchedCallback();
     }
   }
-
-
 }

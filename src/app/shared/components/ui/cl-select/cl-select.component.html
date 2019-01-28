@@ -6,5 +6,5 @@
         (blur)="onBlur()"
         [style.width]="inputWidth"
         (ngModelChange)="onValueChange($event)">
-  <option *ngFor="let el of data" [value]="el.value">{{el.title}}</option>
+  <option *ngFor="let el of data" [value]="el.value || el">{{el.title || el}}</option>
 </select>

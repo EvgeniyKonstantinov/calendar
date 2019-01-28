@@ -9,7 +9,7 @@
   align-items: center;
 
   label {
-    padding-right: 1rem;
+    padding-right: 0.5rem;
   }
 
   .wrapper {
@@ -44,7 +44,7 @@
   }
 
   input::-webkit-inner-spin-button,
-  input::-webkit-clear-button{
+  input::-webkit-clear-button {
     display: none;
     -webkit-appearance: none;
   }
@@ -53,8 +53,33 @@
     display: none;
   }
 
-  input::-webkit-datetime-edit-month-field { color: black; }
-  input::-webkit-datetime-edit-day-field { color: black; }
-  input::-webkit-datetime-edit-year-field { color: black; }
+  input::-webkit-datetime-edit-month-field {
+    color: black;
+  }
+  input::-webkit-datetime-edit-day-field {
+    color: black;
+  }
+  input::-webkit-datetime-edit-year-field {
+    color: black;
+  }
 
+  &.validate.ng-invalid {
+    input {
+      border-color: $warn;
+    }
+  }
+
+  &.disabled {
+    input {
+      background: rgba(196, 196, 196, 0.3);
+      border: none;
+      &::-webkit-datetime-edit-month-field, &::-webkit-datetime-edit-day-field, &::-webkit-datetime-edit-year-field  {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .wrapper {
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
 }

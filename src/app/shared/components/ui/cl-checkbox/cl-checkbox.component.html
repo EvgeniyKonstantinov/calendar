@@ -1,4 +1,4 @@
-<label>
+<label [class.disabled]="readonly">
   <input [title]="title"
          [disabled]="!!readonly"
          [(ngModel)]="value"

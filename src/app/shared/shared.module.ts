@@ -10,6 +10,7 @@ import localeRu from '@angular/common/locales/ru';
 import localeRuExtra from '@angular/common/locales/extra/ru';
 import { ClIconComponent } from './components/ui/cl-icon/cl-icon.component';
 import { ClCheckboxComponent } from './components/ui/cl-checkbox/cl-checkbox.component';
+import { SortByTimePipe } from './pipes/sort-by-time.pipe';
 
 registerLocaleData(localeRu, localeRuExtra);
 
@@ -20,7 +21,8 @@ const SHARED = [
   ClSelectComponent,
   ClDatepickerComponent,
   ClIconComponent,
-  ClCheckboxComponent
+  ClCheckboxComponent,
+  SortByTimePipe
 ];
 
 @NgModule({

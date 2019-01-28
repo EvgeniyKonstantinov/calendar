@@ -1,18 +1,40 @@
-<cl-dialog title="test" [dialogStyle]="'edited'" [dialogMode]="dialogMode.CancelSave"
+<cl-dialog title="Встреча" [dialogStyle]="dialogStyle" [dialogMode]="dialogMode.CancelSave"
            (dialogClose)="onDialogClose($event)">
-  <form [formGroup]="formGroup" (submit)="onSubmit()">
+  <form [formGroup]="formGroup">
     <div class="meet_dialog">
-      <cl-textbox class="meet_textbox" [inputWidth]="'15.8rem'" label="Тема встречи" formControlName="theme"></cl-textbox>
-      <cl-datepicker class="meet_textbox" [inputWidth]="'15.8rem'" [minDate]="'2019-01-21'" [maxDate]="'2019-01-27'"
-                     formControlName="day" label="День встречи"></cl-datepicker>
-      <cl-select class="meet_textbox" [inputWidth]="'15.8rem'" [data]="[{title: '00:00', value: '00:00'}, {title: '00:30', value: '00:30'}]" formControlName="theme" label="Начало встречи"></cl-select>
-      <cl-select class="meet_textbox" [inputWidth]="'15.8rem'" [data]="[{title: '00:00', value: '00:00'}, {title: '00:30', value: '00:30'}]" formControlName="theme" label="Окончание встречи"></cl-select>
-      <cl-textbox class="meet_textbox" [inputWidth]="'15.8rem'" formControlName="theme" label="Участники встречи"></cl-textbox>
+      <cl-textbox class="meet_textbox" [inputWidth]="'15.8rem'" label="Тема встречи"
+                  formControlName="theme" [validate]="touchedForm"
+                  [readonly]="meetStatus && meetStatus !== meetstatusModel.willbe"></cl-textbox>
 
-      <div class="users_area" [style.width]="'15.8rem'">
-        <a class="add_user">Добавить участника</a>
-        <cl-checkbox class="meet_checkbox" [label]="'Виктор Павлов'"></cl-checkbox>
+      <cl-datepicker class="meet_textbox" [inputWidth]="'15.8rem'" [minDate]="workWeek[0].value" [maxDate]="workWeek[6].value"
+                     formControlName="day" label="День встречи" [validate]="touchedForm"
+                     [readonly]="meetStatus && meetStatus !== meetstatusModel.willbe"></cl-datepicker>
+
+      <cl-select class="meet_textbox" [inputWidth]="'15.8rem'" [data]="timeListStart" formControlName="timeStart"
+                 label="Начало встречи" (valueChange)="listStartChange($event)" [validate]="touchedForm"
+                 [readonly]="meetStatus && meetStatus !== meetstatusModel.willbe"></cl-select>
+
+      <cl-select class="meet_textbox" [inputWidth]="'15.8rem'" [data]="timeListEnd" formControlName="timeEnd"
+                 label="Окончание встречи" (valueChange)="listEndChange($event)" [validate]="touchedForm"
+                 [readonly]="meetStatus && meetStatus !== meetstatusModel.willbe"></cl-select>
+
+      <div class="members" formArrayName="members">
+        <span class="label">Участники встречи</span>
+        <ng-container *ngFor="let member of formGroup.controls['members'].controls; let i = index" [formGroupName]="i">
+          <cl-textbox *ngIf="!meetStatus || meetStatus === meetstatusModel.willbe" class="meet_textbox"
+                      [inputWidth]="'15.8rem'" formControlName="name" [validate]="touchedForm"></cl-textbox>
+
+          <div *ngIf="meetStatus && meetStatus !== meetstatusModel.willbe" class="users_area" [style.width]="'15.8rem'">
+            <cl-checkbox class="meet_checkbox" [label]="member.value['name']" formControlName="arrive"
+                         [readonly]="meetStatus !== meetstatusModel.now"></cl-checkbox>
+          </div>
+        </ng-container>
+        <div class="users_area" [style.width]="'15.8rem'" *ngIf="!meetStatus || meetStatus === meetstatusModel.willbe">
+          <a class="add_user" (click)="addMember()">Добавить участника</a>
+        </div>
+
       </div>
+
     </div>
   </form>
 </cl-dialog>

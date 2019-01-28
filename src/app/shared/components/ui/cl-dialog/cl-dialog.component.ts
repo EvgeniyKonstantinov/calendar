@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, O
 import {ClDialogMode} from './cl-dialog-model';
 import {ClDialogButton} from './cl-dialog-button-model';
 import {DialogResult} from './cl-dialog-result-model';
+import {ClDialogStyleModel} from './cl-dialog-style.model';
 
 @Component({
   selector: 'cl-dialog',
@@ -13,21 +14,21 @@ export class ClDialogComponent implements OnInit {
 
   @Input() public title;
   @Input() public dialogMode: ClDialogMode;
-  @Input() public dialogStyle: 'new' | 'edited' = 'new';
+  @Input() public dialogStyle: ClDialogStyleModel;
 
   public buttons: ClDialogButton[];
   public dialogResult = DialogResult;
+  public style;
+  @Output() dialogClose = new EventEmitter<DialogResult>();
+
+  constructor() {
+  }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.keyCode === 27) {
       this.onDialogClose(this.dialogResult.Close);
     }
-  }
-
-  @Output() dialogClose = new EventEmitter<DialogResult>();
-
-  constructor() {
   }
 
   ngOnInit() {
@@ -52,6 +53,15 @@ export class ClDialogComponent implements OnInit {
         ];
         break;
       default:
+        break;
+    }
+
+    switch (this.dialogStyle) {
+      case ClDialogStyleModel.edited:
+        this.style = 'edited';
+        break;
+      default:
+        this.style = 'new';
         break;
     }
   }

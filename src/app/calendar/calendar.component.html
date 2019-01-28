@@ -1,23 +1,23 @@
 <table class="week">
   <thead>
     <tr class="days">
-      <td class="days_el" *ngFor="let day of days; let i = index" [class.active]="i === 3">
-        {{day}}
+      <td class="days_el" *ngFor="let date of dates; let i = index" [class.active]="date.value === nowDate">
+        {{date.dayName}}
       </td>
     </tr>
     <tr class="dates">
       <td class="dates_el" *ngFor="let date of dates; let i = index"
-          [class.active]="i === 3" [class.disable]="i === 5 || i === 6">
-        {{date}}
+          [class.active]="date.value === nowDate" [class.disable]="i === 5 || i === 6" (dblclick)="onShowDialog(date.value, i, $event)">
+        {{date.title}}
       </td>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="data_cell" *ngFor="let date of dates; let i = index"
-          [class.active]="i === 3" [class.disable]="i === 5 || i === 6" (click)="onShowDialog()">
-        <ng-container *ngFor="let meet of meeting">
-          <div class="meet" *ngIf="date === meet.day">
+          [class.active]="date.value === nowDate" [class.disable]="i === 5 || i === 6" (dblclick)="onShowDialog(date.value, i, $event)">
+        <ng-container *ngFor="let meet of meetings$ | async; trackBy: trackByMeeting">
+          <div class="meet" *ngIf="date.value === meet.day" (dblclick)="onShowDialog(date.value, i, $event, meet)">
             {{meet.timeStart}} >> Встреча
           </div>
         </ng-container>
@@ -27,4 +27,4 @@
 </table>
 
 
-<cl-calendar-dialog *ngIf="showedDialog" (closeDialog)="onCloseDialog()"></cl-calendar-dialog>
+<cl-calendar-dialog *ngIf="showedDialog" (closeDialog)="onCloseDialog($event)" [pickMeeting]="pickMeeting" [pickDate]="pickDate" [nowDate]="nowDate" [nowTime]="nowTime" [workWeek]="dates"></cl-calendar-dialog>

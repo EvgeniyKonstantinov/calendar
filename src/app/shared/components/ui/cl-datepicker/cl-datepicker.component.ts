@@ -10,7 +10,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import {TimeUtils} from '../../../utils/time';
 
 @Component({
   selector: 'cl-datepicker',
@@ -28,9 +28,8 @@ import {DatePipe} from '@angular/common';
 export class ClDatepickerComponent implements OnInit, ControlValueAccessor, OnChanges {
 
   @Input() value: string;
-  @Input() readonly: boolean;
-  @Input() placeholder = '';
-  @Input() title = '';
+  @Input() placeholder: string;
+  @Input() title: string;
   @Input() required: boolean;
   @Input() minDate: string;
   @Input() maxDate: string;
@@ -38,6 +37,8 @@ export class ClDatepickerComponent implements OnInit, ControlValueAccessor, OnCh
   @Input() label: string;
   @Input() formControlName: string;
   @Input() inputWidth: string;
+  @HostBinding('class.validate') @Input() validate: boolean;
+  @HostBinding('class.disabled') @Input() readonly: boolean;
 
   public dayWeek: string;
   @Output() readonly valueChange = new EventEmitter<string>();
@@ -45,11 +46,9 @@ export class ClDatepickerComponent implements OnInit, ControlValueAccessor, OnCh
   private onChangedCallback: (_) => void;
   private onTouchedCallback: () => void;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe) {
-  }
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    console.log(this.value);
   }
 
   public ngOnChanges(changes: SimpleChanges) {
@@ -90,10 +89,9 @@ export class ClDatepickerComponent implements OnInit, ControlValueAccessor, OnCh
   }
 
   private setDateValue(): void {
-    this.dateValue = this.datePipe.transform(this.value, 'yyyy-MM-dd', '', 'ru');
-    this.dayWeek = this.datePipe.transform(this.value, 'E', '', 'ru');
-    console.log(this.dateValue);
-    console.log(this.dayWeek);
+    this.dateValue = TimeUtils.manipulationFormat(this.value);
+    this.dayWeek = TimeUtils.weekDay(this.value);
+    this.value = this.dateValue;
     this.changeDetectorRef.detectChanges();
   }
 
